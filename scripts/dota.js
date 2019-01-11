@@ -187,7 +187,6 @@ function getHeroes() {
                     <p class="card-text">
                     <p>primaryattribut:${hero.primary_attr}</p>
                     <p>attack_type:${hero.attack_type}</p>
-
                     </p>
                 </div>
             </div>
