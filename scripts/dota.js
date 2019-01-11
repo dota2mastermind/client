@@ -4,12 +4,12 @@ var playersData = []
 
 function getTeams() {
   axios.get(`${url}/teams`)
-  .then(function (response) {
-    teamsData = response.data
-    $("#content").html("")
-    response.data.forEach(function(team) {
-      $("#content").append(
-        `
+    .then(function (response) {
+      teamsData = response.data
+      $("#content").html("")
+      response.data.forEach(function (team) {
+        $("#content").append(
+          `
         <div class="col-md-4">
             <div class="card" style="width: 18rem;">
                 <center><img src="${team.logo_url}" style="height:200px;width:200px" class="card-img-top" alt="${team.name}"><center>
@@ -35,12 +35,12 @@ function getTeams() {
 
 function getPlayers() {
   axios.get(`${url}/players`)
-  .then(function (response) {
-    playersData = response.data
-    $("#content").html("")
-    response.data.forEach(function(player) {
-      $("#content").append(
-        `
+    .then(function (response) {
+      playersData = response.data
+      $("#content").html("")
+      response.data.forEach(function (player) {
+        $("#content").append(
+          `
         <div class="col-md-4">
             <div class="card" style="width: 18rem;">
                 <center><img src="${player.avatarfull}" style="height:200px;width:200px" class="card-img-top" alt="${player.personaname}"><center>
@@ -62,13 +62,13 @@ function getPlayers() {
 
 function getTeamDetail(teamId) {
   axios.get(`${url}/teams/${teamId}`)
-  .then(function (response) {
-    const team = response.data
-    videoList(`team=${team.name}`)
-    $("#home").hide()
-    $("#detail").html("")
-    $("#detail").append(
-      `
+    .then(function (response) {
+      const team = response.data
+      videoList(`team=${team.name}`)
+      $("#home").hide()
+      $("#detail").html("")
+      $("#detail").append(
+        `
       <hr>
       <h5>${team.name}</h5>
       <hr>
@@ -163,6 +163,7 @@ function getPlayerDetail(account_id) {
             </div>
         </div>
         <div>
+        
         `
       )
     })
@@ -187,7 +188,6 @@ function getHeroes() {
                     <p class="card-text">
                     <p>primaryattribut:${hero.primary_attr}</p>
                     <p>attack_type:${hero.attack_type}</p>
-
                     </p>
                 </div>
             </div>
