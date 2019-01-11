@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hacktiv8GIT</title>
+    <title>Dota2 Mastermind</title>
+
 
     <meta property="og:url" content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />
     <meta property="og:type" content="article" />
@@ -28,19 +29,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        .card {
+                background-color: black;
+                color:white;
+                margin-top: 15px;
 
+            }
+        </style>
 </head>
 
-<body>
+<body style="background-image: url('https://images2.alphacoders.com/474/thumb-1920-474206.jpg')">
     <div id="fb-root"></div>
 
     <div class="container my-3" id="login">
         <div class="row">
             <div class="col-12 p-0 text-center">
                 <img src="./images/Dota-PNG-Background-Image.png " alt style=" height:40%;">
-
                 <h6>
-                    Belum punya akun ? <a onclick="register()"> Daftar di sini </a>
+                    Belum punya akun ? <a onclick="cekLogin()"> Daftar di sini </a>
                 </h6>
                 <div class="row">
                     <div class="col-md-4 mx-auto">
@@ -50,14 +57,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1" class="text-left">Email address</label>
-                                <input type="email" class="form-control" aria-describedby="emailHelp" aria-describedby="emailHelp"
-                                    placeholder="me@example.com" id="login_email">
+                                <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="me@example.com"
+                                    id="login_email">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Password</label>
                                 <input type="password" class="form-control" aria-describedby="emailHelp" id="login_password">
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block" onclick="LoginProcess()">
+                            <button type="submit" class="btn btn-primary btn-block" onclick="loginProcess()">
                                 Log In
                             </button>
                             <hr>
@@ -85,33 +92,58 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1" class="text-left">Name</label>
-                                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="name"
-                                    id="register_name">
+                                <input type="text" class="form-control" placeholder="name" id="register_name">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1" class="text-left">Email address</label>
-                                <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="enter email"
-                                    id="register_email">
+                                <input type="email" class="form-control" placeholder="enter email" id="register_email">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Password</label>
-                                <input type="password" class="form-control" aria-describedby="emailHelp" placeholder="enter password"
-                                    id="register_password">
+                                <input type="password" class="form-control" placeholder="enter password" id="register_password">
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block" onclick="RegisterProcess()">Register</button>
+                            <button type="submit" class="btn btn-primary btn-block" onclick="registerProcess()">Register</button>
                         </div>
                         <br>
 
-                        Sudah punya akun? Silakan <a onclick="login()" return false>login </a>
+                        Sudah punya akun? Silakan <a onclick="loginForm()" return false>login </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div id="carousel">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="http://i.imgur.com/0uueOOL.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2>Welcome to Dota2 Mastermind</h2>
+                        <br>
+                        <hr>
+                        <button class="btn btn-success ml-3" onclick="loginForm()">Login</button>
+                        <button class="btn btn-success ml-3" onclick="registerForm()">Register</button>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
     <!-- navbar -->
     <div id="navbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-            <a class="navbar-brand" href="#" style="color: aliceblue">Navbar</a>
+            <a class="navbar-brand" href="#" style="color: aliceblue">Dota2 MasterMind</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -120,19 +152,20 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#" style="color: aliceblue">Team<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="#" onclick="renderTeam()" style="color: aliceblue">Team<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: aliceblue">Player</a>
+                        <a class="nav-link" href="#" onclick="renderPlayer()" style="color: aliceblue">Player</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" style="color: aliceblue" onclick="getHeroes()">Heroes</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <form class="form-inline my-2 my-lg-0 ml-5" style="text-align: center">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchInput">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="search()">Search</button>
                 </form>
+                <button class="btn btn-success ml-3" onclick="logout()">Log out</button>
             </div>
         </nav>
         <br>
@@ -141,18 +174,7 @@
             <div class="row" id="content">
 
                 <!-- looping here -->
-                <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="./images/Dota-PNG-Background-Image.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the
-                                bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
 
-                        </div>
-                    </div>
-                </div>
                 <!-- end here -->
 
             </div>
@@ -160,123 +182,16 @@
 
         <!-- detail page -->
         <div class="container" id="detail" style="margin-top: 100px">
-            <hr>
-            <h5>Detail</h5>
-            <hr>
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card" style="width: 18rem;">
-                            <img src="./images/Dota-PNG-Background-Image.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
 
 
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card" style="width: 16rem;">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card" style="width: 16rem;">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card" style="width: 16rem;">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
         </div>
         <!-- video -->
 
         <div class="container">
-            <hr>
-            <h5>Related videos</h5>
-            <hr>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="card" style="width: 16rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up
-                                the
-                                bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card" style="width: 16rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up
-                                the
-                                bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card" style="width: 16rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up
-                                the
-                                bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="card" style="width: 16rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up
-                                the
-                                bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="row" id="videos">
+                <hr>
+                <h5 id="related">Related videos</h5>
+                <hr>
 
             </div>
 
@@ -284,10 +199,8 @@
         </div>
 
         <!-- createGroup -->
-        <script src="./script/index.js"></script>
-        <!-- <script src="script/index.js"></script> -->
+        <script src="./scripts/index.js"></script>
         <script src="./scripts/dota.js"></script>
-
 
 </body>
 

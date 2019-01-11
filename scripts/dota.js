@@ -1,39 +1,11 @@
 const url = 'http://localhost:3000/dota'
-
-axios.get(`${url}/teams`)
-  .then(function (response) {
-    console.log(response);
-    $("#content").html("")
-    response.data.forEach(function (team) {
-      $("#content").append(
-        `
-      <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
-              <center><img src="${team.logo_url}" style="height:200px;width:200px" class="card-img-top" alt="${team.name}"><center>
-              <div class="card-body">
-                  <h5 class="card-title">${team.name}</h5>
-                  <p class="card-text">
-                    Rating: ${team.rating},<br>
-                    Wins: ${team.wins},<br>
-                    Loses: ${team.losses}
-                  </p>
-                  <a href="#" onclick="getTeamDetail(${team.team_id})" class="btn btn-primary">Details</a>
-              </div>
-          </div>
-      </div>
-      `
-      )
-    })
-  })
-  .catch(function (error) {
-    console.log(error.message);
-  });
-
+var teamsData = []
+var playersData = []
 
 function getTeams() {
   axios.get(`${url}/teams`)
     .then(function (response) {
-      console.log(response);
+      teamsData = response.data
       $("#content").html("")
       response.data.forEach(function (team) {
         $("#content").append(
@@ -64,7 +36,7 @@ function getTeams() {
 function getPlayers() {
   axios.get(`${url}/players`)
     .then(function (response) {
-      console.log(response);
+      playersData = response.data
       $("#content").html("")
       response.data.forEach(function (player) {
         $("#content").append(
@@ -92,6 +64,7 @@ function getTeamDetail(teamId) {
   axios.get(`${url}/teams/${teamId}`)
     .then(function (response) {
       const team = response.data
+      videoList(`team=${team.name}`)
       $("#home").hide()
       $("#detail").html("")
       $("#detail").append(
@@ -165,6 +138,7 @@ function getPlayerDetail(account_id) {
   axios.get(`${url}/players/${account_id}`)
     .then(function (response) {
       const player = response.data
+      videoList(`player=${player.profile.name}`)
       $("#home").hide()
       $("#detail").html("")
       $("#detail").append(
@@ -189,6 +163,7 @@ function getPlayerDetail(account_id) {
             </div>
         </div>
         <div>
+        
         `
       )
     })
@@ -213,7 +188,6 @@ function getHeroes() {
                     <p class="card-text">
                     <p>primaryattribut:${hero.primary_attr}</p>
                     <p>attack_type:${hero.attack_type}</p>
-
                     </p>
                 </div>
             </div>
